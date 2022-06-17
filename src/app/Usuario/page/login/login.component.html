@@ -1,1 +1,44 @@
-<p>login works!</p>
+<div class="div-login-general">
+    <div class="div-login-center">
+      <mat-card id="logincard">
+            <img src="https://estudiaperu.pe/wp-content/uploads/2021/04/UPC-carreras-para-gente-que-trabaja.png"> <br><br>
+       
+        <mat-card-title class="logintitle">LOGIN<mat-icon aria-hidden="false" aria-label="Example home icon">person</mat-icon>
+        </mat-card-title>
+        <mat-card-subtitle class="loginsubtitle">Finanzas</mat-card-subtitle>
+        <mat-card-content class="contentlogincard">
+          <form [formGroup]="registerForm"  (submit)="submitForm()"  class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <input  type="email" placeholder="email"
+              [(ngModel)]="login.email" 
+             
+              formControlName="email"
+               aria-label="Email"
+              matInput>
+
+            </mat-form-field>
+        
+            <mat-form-field class="example-full-width" appearance="fill">
+              <input   type="password"    placeholder="password"  
+              aria-label="Password"
+              formControlName="password"
+              [(ngModel)]="login.password" 
+
+              matInput >
+            </mat-form-field>
+          </form>      
+        </mat-card-content>
+        <table class="actionslogin">
+          <tr>
+            <mat-card-actions>        
+              <button mat-raised-button color="primary" (click)="loginhandler()">Login</button>          
+           </mat-card-actions>
+          </tr>
+          
+          <tr>
+            <a class="registerLink" [routerLink]="'/registro'">Register</a> 
+          </tr>
+        </table>  
+      </mat-card>
+    </div>
+  </div>

@@ -1,0 +1,50 @@
+.div-login-general {
+    background: rgb(255, 255, 255);
+    height: 580px;
+  
+  
+    display: flex;
+    justify-content: center;
+  
+    
+  } 
+  
+  .div-login-center {
+      
+    margin-top: 100px;
+        width: 400px;
+        align-items: center;
+        border-style: solid;
+        border-width: 7px;
+        border-color: rgb(255, 0, 0);
+  }
+  
+  .div-login-center img{
+    width: 200px;
+    margin-left: 90px;
+    align-items: center;
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgb(241, 6, 6);
+  }
+  .logincard{
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .contentlogincard{
+    margin-left: 80px;
+  }
+  .actionslogin{
+    margin-left: 150px;
+  }
+  .logintitle{
+   
+    margin-left: 150px;
+  }
+  .loginsubtitle{
+    
+    margin-left: 165px;
+  }
