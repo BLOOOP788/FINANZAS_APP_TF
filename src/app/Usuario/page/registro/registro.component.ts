@@ -11,6 +11,7 @@ import { RegistroService } from '../../service/registro.service';
 export class RegistroComponent implements OnInit {
   userData:User;
   submitted:boolean=false;
+  showERROR=false;
   registerForm: FormGroup=this.formBuilder.group({
     name:['',{validators:[Validators.required],updateOn:'change'}],
     email:['',{validators:[Validators.required,Validators.email],updateOn:'change'}],
@@ -50,7 +51,8 @@ export class RegistroComponent implements OnInit {
       window.alert("Te registraste exitosamente");
       this.route.navigateByUrl('/login');
     },error=>{
-      window.alert("Correo ya registrado");  
+      //window.alert("Correo ya registrado");  
+      this.showERROR=true;
     })
   }
 }

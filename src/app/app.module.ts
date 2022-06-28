@@ -24,6 +24,7 @@ import { RellenodedatosComponent } from './Usuario/page/rellenodedatos/rellenode
 import { MuestradedatosComponent } from './Usuario/page/muestradedatos/muestradedatos.component';
 import { HistorialComponent } from './Usuario/page/historial/historial.component';
 import { RegistroComponent } from './Usuario/page/registro/registro.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,9 @@ import { RegistroComponent } from './Usuario/page/registro/registro.component';
     MatCardModule,
     MatGridListModule,
     MatListModule,
-    MatOptionModule
+    MatOptionModule,
+    MatDialogModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,84 @@
+.spacer {
+    flex: 1 1 auto;
+}
+.container img{
+    width: 100px;
+    margin-left: 90px;
+    align-items: center;
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgb(241, 6, 6);
+  }
+  
+.div-tripEvent1{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background:#264D71;
+    } 
+    
+.div-tripEvent2{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+          width:1200px;
+          align-items: center;
+          background:#264D71;
+    }
+
+.cardevents{
+    margin-top: 100px;
+    border-color: black;
+    background:#264D71;
+}
+
+.scrollbar{
+    background: #262736;
+    height: 50px;
+    border: 3px solid black;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.scrollbar img{
+    float: right;
+}
+.scrollbar ul li{
+float:left;
+list-style: none;
+margin:10px;
+line-height: 30px;
+color: white;
+
+}
+
+.success,
+.warning,
+.warning2,
+.error,
+.validation {
+	border: 1px solid;
+	margin: 10px auto;
+	padding: 15px 10px 15px 10px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+	max-width: 460px;
+}
+.success {
+	color: #4F8A10;
+	background-color: #DFF2BF;
+	
+}
+.warning {
+	color: #9F6000;
+	background-color: #FEEFB3;
+	
+}
+.warning2 {
+	color: #2c2fe7;
+	background-color: #acadff;
+	
+}

@@ -7,19 +7,20 @@
         
         <img src="https://estudiaperu.pe/wp-content/uploads/2021/04/UPC-carreras-para-gente-que-trabaja.png">
        
-        <a mat-button [routerLink]="'/main'" >Inicio</a>
+        <a mat-button [routerLink]="'/main/1'" >Inicio</a>
         <a mat-button [routerLink]="'/historial'" >Historial</a>
-        
+        <a mat-button (click)="logOut()" >Cerrar Sesion</a>
              
       </mat-toolbar-row>
     </div>
   </mat-toolbar>
 <div>
-<mat-card class="example-card">
+<div class="main-div">
+  <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      <mat-card-title>{{userData.name}}</mat-card-title>
+      <mat-card-subtitle>{{userData.email}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         
@@ -28,14 +29,14 @@
                 <mat-grid-tile [colspan]="1" [rowspan] = "1" >
                     <mat-form-field style="width: 80%;">
                         <mat-label>Valor Nominal</mat-label>
-                        <input matInput autocomplete="off" type="text"  formControlName="valorNominal" [(ngModel)]="carteraData.valorNominal" required >
+                        <input matInput autocomplete="off" type="number"  formControlName="valorNominal" [(ngModel)]="carteraData.valorNominal" required >
                       
                     </mat-form-field>
                 </mat-grid-tile>
                <mat-grid-tile [colspan]="2" [rowspan] = "1" >
                    <mat-form-field style="width: 80%;">
-                       <mat-label>tasa Cupon</mat-label>
-                       <input matInput  autocomplete="off" type="text" formControlName="tasaCupon"[(ngModel)]="carteraData.tasaCupon" required>
+                       <mat-label>Tasa Cupon(TEA)%</mat-label>
+                       <input matInput  autocomplete="off" type="number" formControlName="tasaCupon"[(ngModel)]="carteraData.tasaCupon" required>
                       
                    </mat-form-field>
                </mat-grid-tile>
@@ -43,21 +44,21 @@
                 <form>
                     <h4>mat-select</h4>
                     <mat-form-field appearance="fill">
-                        <mat-label>Favorite car</mat-label>
+                        <mat-label>Periodo De Pago</mat-label>
                         <select matNativeControl [(ngModel)]="selectedPeriodo" name="periodo">
-                          <option value="" selected></option>
+                          
                           <option *ngFor="let car of actions" [value]="car.name">
                             {{car.name}}
                           </option>
                         </select>
                       </mat-form-field>
-                    <p> Selected periodo: {{selectedPeriodo}} </p>
+                    
                 </form>
                </mat-grid-tile>
 
                <mat-grid-tile [colspan]="1" [rowspan] = "1" >
                    <mat-form-field style="width: 80%;">
-                       <mat-label>vencimiento</mat-label>
+                       <mat-label>Vencimiento</mat-label>
                        <input matInput  autocomplete="off" type="number" formControlName="vencimiento" [(ngModel)]="carteraData.vencimiento" required>
                        
                    </mat-form-field>
@@ -65,8 +66,8 @@
 
                <mat-grid-tile [colspan]="2" [rowspan] = "1" >
                    <mat-form-field style="width: 80%;">
-                       <mat-label>tasa Negociacion</mat-label>
-                       <input matInput  autocomplete="off" type="text" formControlName="tasaNegociacion" [(ngModel)]= "carteraData.tasaNegociacion" required>
+                       <mat-label>Tasa Negociacion(TEA) %</mat-label>
+                       <input matInput  autocomplete="off" type="number" formControlName="tasaNegociacion" [(ngModel)]= "carteraData.tasaNegociacion" required>
                       
                    </mat-form-field>
                </mat-grid-tile>
@@ -76,13 +77,13 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Metodo</mat-label>
                         <select matNativeControl [(ngModel)]="selectedMetodo" name="metodo">
-                          <option value="" selected></option>
+                         
                           <option *ngFor="let car of metodo" [value]="car.name">
                             {{car.name}}
                           </option>
                         </select>
                       </mat-form-field>
-                    <p> Selected food: {{selectedPeriodo}} </p>
+                    
                 </form>
                </mat-grid-tile>
                <mat-grid-tile [colspan]="1" [rowspan] = "1" >
@@ -90,19 +91,21 @@
                     <h4>mat-select</h4>
                     <mat-form-field appearance="fill">
                         <mat-label>Moneda</mat-label>
-                        <select matNativeControl [(ngModel)]="selectedMoneda" name="moneda">
-                          <option value="" selected></option>
+                        <select matNativeControl [(ngModel)]="selectedMoneda" name="moneda">                  
                           <option *ngFor="let car of moneda" [value]="car.name">
                             {{car.name}}
                           </option>
                         </select>
                       </mat-form-field>
-                    <p> Selected food: {{selectedPeriodo}} </p>
+                    
                 </form>
                </mat-grid-tile>
                <mat-grid-tile [colspan]="1" [rowspan] = "1" >
-                   <button [disabled]="!createData.valid" mat-raised-button color="primary" [routerLink]=" '/tripEvent'" (click)="postUser()" >Create</button>
+                   <button [disabled]="!createData.valid" mat-raised-button color="primary"  (click)="postUser()" >Create</button>
                </mat-grid-tile>
+               <mat-grid-tile [colspan]="1" [rowspan] = "1" >
+                <button  mat-raised-button color="warn"  (click)="cleanvariables()" >Limpiar Tablas</button>
+            </mat-grid-tile>
               
             </mat-grid-list>
         </form>
@@ -110,38 +113,134 @@
      
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>Guardar</button>
-      <button mat-button>Ir Historial</button>
+      <button mat-button [disabled]="!createData.valid" mat-raised-button color="primary"  (click)="guardarCartera()"   >Guardar</button>
+      <button mat-button  (click)="cleanvariables()" [routerLink]="'/historial'">Abrir Historial</button>
     </mat-card-actions>
 </mat-card>
+
 </div>
-<div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+<table class="default">
+
+  <tr>
+
+    <td>
+      <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Capital </th>
+        <td mat-cell *matCellDef="let element"> {{element.capital}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef> Amortizacion </th>
+        <td mat-cell *matCellDef="let element" style="color:#ff0000"> {{element.amortizacion}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef> Interes </th>
+        <td mat-cell *matCellDef="let element" style="color:#ff0000"> {{element.intereses}} </td>
+      </ng-container>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="couta">
+        <th mat-header-cell *matHeaderCellDef> Cuota </th>
+        <td mat-cell *matCellDef="let element" style="color:#ff0000"> {{element.couta}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    </div>
+    </td>
+
+    <td>
+      <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource2">
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element" > {{element.position}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="flujos">
+        <th mat-header-cell *matHeaderCellDef> flujos </th>
+        <td mat-cell *matCellDef="let element"> {{element.flujos}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="flujoVP">
+        <th mat-header-cell *matHeaderCellDef> flujoVP </th>
+        <td mat-cell *matCellDef="let element" > {{element.flujoV}} </td>
+      </ng-container>
+  
+      
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+    </table>
+    </div>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource3">
         <!-- Position Column -->
-        <ng-container matColumnDef="demo-position">
-          <th mat-header-cell *matHeaderCellDef> AÑOS </th>
-          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        <ng-container matColumnDef="flujovpt">
+          <th mat-header-cell *matHeaderCellDef> FLUJO VP*T. </th>
+          <td mat-cell *matCellDef="let element" > {{element.flujoVPT}} </td>
         </ng-container>
-      
+    
         <!-- Name Column -->
-        <ng-container matColumnDef="demo-name">
-          <th mat-header-cell *matHeaderCellDef> Capital </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <ng-container matColumnDef="convexidad">
+          <th mat-header-cell *matHeaderCellDef> CONVEXIDAD </th>
+          <td mat-cell *matCellDef="let element"> {{element.convexidad}} </td>
         </ng-container>
-      
-        <!-- Weight Column -->
-        <ng-container matColumnDef="demo-weight">
-          <th mat-header-cell *matHeaderCellDef> Amortizacion </th>
-          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-        </ng-container>
-      
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="demo-symbol">
-          <th mat-header-cell *matHeaderCellDef> Intereses </th>
-          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
       </table>
-</div>
+      </div>
+    </td>
+    <td>
+      <mat-card class="example-card">
+        <mat-card-title>Resultados:</mat-card-title>        
+        <mat-card-content>
+          
+          <p>Sumatoria de los flujos VP*T:</p>
+          <p>{{sumaFlujoVPT}}</p>
+          <p>Sumatoria de la convexidad:</p>
+          <p>{{sumaConvexidad}}</p>
+          <p>Precio del Bono Negociado:</p>
+          <p>{{sumaFlujoVp}}</p>
+          <p>Duracion:</p>
+          <p>{{duracion}}</p>
+          <p>Duracion Media:</p>
+          <p>{{duracionmedia}}</p>
+          <p>Variacion taza Negociacion:</p>
+          <p>{{variaciontasanegociacion}}</p>
+          <p>Variación % precio bono</p>
+          <p>{{variacionpreciobono}}</p> 
+          <p>Precio del bono</p>
+          <p>{{preciodelbono}}</p> 
+          <p>Convexidad</p>
+          <p>{{convexidad}}</p> 
+          <p>TIR</p>
+          <p>{{TIR}}%</p>
+        </mat-card-content>
+      </mat-card>
+    </td>
+  </tr>
+
+</table>
+
+ <!-- get tablas -->
+ 

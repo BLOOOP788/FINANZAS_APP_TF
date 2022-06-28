@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   submitted:boolean=false;
   login:autrequest;
   emailPrueb:string='owo';
-    
+  showERROR=false;
   
   registerForm: FormGroup=this.formBuilder.group({
     email:['',{validators:[Validators.required,Validators.email],updateOn:'change'}],
@@ -50,14 +50,15 @@ export class LoginComponent implements OnInit {
       if (this.currentUser.password==this.login.password) {
        //aca se guarda el usuario en el local storage
         localStorage.setItem('user', JSON.stringify(this.currentUser));   
-       return this.route.navigateByUrl('/main'); 
+       return this.route.navigateByUrl('/main/1'); 
       }
       else {
        return this.route.navigateByUrl('/login');
 
       } 
     },error=>{
-      window.alert("Correo No registrado");  
+      //window.alert("Correo No registrado");
+      this.showERROR=true;  
     });  
       
   }

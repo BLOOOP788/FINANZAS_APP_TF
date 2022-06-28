@@ -4,14 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './Usuario/page/login/login.component';
 import { RegistroComponent } from './Usuario/page/registro/registro.component';
 import { RellenodedatosComponent } from './Usuario/page/rellenodedatos/rellenodedatos.component';
+import { HistorialComponent } from './Usuario/page/historial/historial.component';
 const routes: Routes = [
   {path:'',redirectTo:'login',pathMatch:'full'},
   {path:'login',component:LoginComponent},
   {path:'registro',component:RegistroComponent},
-  {path:'main',component:RellenodedatosComponent}
+  {path:'main/:id',component:RellenodedatosComponent},
+  {path:'historial',component:HistorialComponent}
 ];
 
-@NgModule({
+@NgModule({ 
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

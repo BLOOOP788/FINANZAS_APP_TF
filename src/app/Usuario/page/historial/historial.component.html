@@ -1,1 +1,58 @@
-<p>historial works!</p>
+<mat-toolbar class="printoolbar">
+
+    <div class="container">
+      <mat-toolbar-row>
+        <a mat-button  >Bienvenido</a>
+        <span class="spacer"></span>
+        
+        <img src="https://estudiaperu.pe/wp-content/uploads/2021/04/UPC-carreras-para-gente-que-trabaja.png">
+       
+        <a mat-button [routerLink]="'/main'" >Inicio</a>
+        <a mat-button [routerLink]="'/historial'" >Historial</a>
+        <a mat-button (click)="logOut()" >Cerrar Sesion</a>
+             
+      </mat-toolbar-row>
+    </div>
+  </mat-toolbar>
+<div>
+    <div class="div-tripEvent1">
+        <div class="div-tripEvent2">
+            
+                <div *ngFor="let element of carteras.content" class="cardevents">
+                 
+                <mat-card class="example-card" >
+                    <mat-card-header>
+                      <img mat-card-avatar src="https://estudiaperu.pe/wp-content/uploads/2021/04/UPC-carreras-para-gente-que-trabaja.png" class="example-header-image">
+                  
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title>Cartera De Bono</mat-card-title>
+                      <mat-card-subtitle></mat-card-subtitle>
+                    </mat-card-header>
+                   
+                    <mat-card-content>
+                      <div class="success">
+                        <p>Valor Nominal</p>
+                        <p>{{element.valorNominal}}</p>
+                     </div>
+                     <div class="warning">
+                      <p>Valor Taza Cupon</p>
+                        <p>{{element.tasaCupon}}%</p>
+                     </div>
+                     <div class="warning2">
+                      <p>Vencimiento</p>
+                        <p>{{element.vencimiento}} años</p>     
+                     </div>
+                        
+                         
+                    </mat-card-content>                 
+                   
+                    <mat-card-actions>
+                      <button mat-button color="primary"(click)="getId(element.id)">Cargar</button>
+                      <button mat-button color="warn" (click)="eliminar(element.id)">Eliminar</button>
+                    </mat-card-actions>
+                </mat-card>
+            
+                </div>
+           
+        </div>
+      </div>

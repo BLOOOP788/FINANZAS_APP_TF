@@ -9,7 +9,7 @@ import	{catchError,retry}from 'rxjs/operators'
 })
 export class DatosmainService {
   basePath='https://finanzastfback.herokuapp.com/api/v1/user'
-
+  basePath2='https://finanzastfback.herokuapp.com/api/v1'
   httpOptions={
        
     headers:new HttpHeaders({
@@ -43,7 +43,7 @@ export class DatosmainService {
 
   //Get event by id
   getById(id: any,id2:any){
-    return this.http.get<Cartera>(`${this.basePath}/${id}/historial/${id}`, this.httpOptions)
+    return this.http.get<Cartera>(`${this.basePath2}/historial/${id2}`, this.httpOptions)
     .pipe(
       retry(2),
       catchError(this.handleError));
